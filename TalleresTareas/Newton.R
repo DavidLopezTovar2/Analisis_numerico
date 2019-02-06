@@ -37,7 +37,7 @@ newtonDN = function(f,  x0, tol, maxiter)
   }
 }
 ## --- Pruebas
-f  = function(x) x-cos(x)
+f  = function(x) exp(0)^x-pi*x
 options(digits = 15)
 newtonDN(f, 0.5, 1e-10, 10)
 
