@@ -1,0 +1,28 @@
+
+#Funcion
+mod <- function(x,y)
+{
+  return (x %% y)
+}
+#Fix
+fix <- function(x,y)
+{
+  return (x %/% y)
+}
+
+#Divisiones
+divisiones<-function(x)
+{
+  n<-x
+  d<-0
+  i<-0
+  while(n>0){
+    d<-mod(n,2)
+    n<-fix(n,2)
+    i<-i+1
+    cat("d:=",d,"\n")
+  }
+  cat("Número de iteraciones:",i,"\n")
+}
+
+divisiones(73);
