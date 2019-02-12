@@ -22,7 +22,7 @@ divisiones<-function(x)
     i<-i+1
     cat("d:=",d,"\n")
   }
-  cat("Número de iteraciones:",i,"\n")
+  cat("NÃºmero de iteraciones:",i,"\n")
 }
 
 divisiones(73);
