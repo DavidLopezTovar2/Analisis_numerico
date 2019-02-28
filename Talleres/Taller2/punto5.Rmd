@@ -1,0 +1,15 @@
+beta = 3
+alpha = 0
+
+A = matrix(c(2, 0,-1,
+             beta,2 , -1,
+             -1, 1, 1), nrow=3, byrow=TRUE)
+B = c(1,2,1)
+C = c(1,1,1)
+
+
+for(i in 0:10){
+  cat("--->\n")
+  sol = itersolve(A, B, x0=c(1,1,1), i, method = "Jacobi")
+  print(sol)
+}
