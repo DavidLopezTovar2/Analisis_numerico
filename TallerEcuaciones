@@ -1,0 +1,116 @@
+
+fp = function(t,y, parms)
+  {
+  s = -1.68*10^(-9)*y^4+2.6880
+  return(list(s)) # ode requiere salida sea una lista
+}
+tis= seq(0,200,200/20)
+# Usamos la función ode()
+sol = ode(c(180), tis, fp, parms=NULL, method = "rk4") # método Runge Kutta orden 4
+# Salida
+tabla = cbind(tis, solnumerica[,2] )
+colnames(tabla) = c("ti", " Ti ")
+tabla
+# Representación
+plot(tis, sol[,2] )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rm(list=ls())
+# Runge-Kutta (de 2 etapas o 2o orden), un solo paso
+# y’=6y - .007y^2    y’=y^2-6y
+a <- 1
+b <- -6
+ff <- function(x,y)
+{ 
+  return( y*(a*y+b) ) 
+}
+h <- 0.2
+x0 <- 0
+x1 <- 0.2
+x <- seq(x0,x1,by=h)
+m <- length(x)
+y <- rep(0,m)
+y[1] <- -1 # condiciones iniciales
+y0 <- 2
+for( j in 2:m )
+{
+  f0 <- ff(x[j-1],y[j-1])
+  k1 <- h*f0
+  k2 <- h*ff(x[j],y[j-1]+k1)
+  y[j] <- y[j-1]+(k1+k2)/2
+} # Runge-Kutta-2
+yrk2 <- y[m] 
+xx <- seq(0,h,length=200)
+plot(xx,type="l",xlab="",ylab="",lwd=2,col="blue",cex.main=.9,ylim=c(-1,3),xlim=c(-.05,.22),main="Solucion de y’ = y(ay+b), y(0)=2 h=0.1")
+segments(x0,y0,x1,yrk2,col="cyan",lwd=2)
+points(c(x1),c(yrk2),pch=20)
+legend(0,150,legend=c("Runge-Kutta (Ord.2)"),col=c("cyan"),lwd=2,bty="n")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rm(list=ls())
+# Runge-Kutta (de 2 etapas o 2o orden), un solo paso
+# y’=6y - .007y^2
+a <- -0.007
+b <- 6
+ff <- function(x,y){ return( y*(a*y+b) ) }
+h <- .5
+x0 <- 0
+x1 <- 0.1
+x <- seq(x0,x1,by=h)
+m <- length(x)
+y <- rep(0,m)
+y[1] <- 10 # condiciones iniciales
+y0 <- 10
+C0 <- -log((a*y0+b)/y0)/b
+y1 <- y0+h*ff(x0,y0) # 39.65 Euler
+ya <- b/(exp(-b*(x1+C0))-a) # 164.2768 Exacto
+for( j in 2:m ){
+  f0 <- ff(x[j-1],y[j-1])
+  k1 <- h*f0
+  k2 <- h*ff(x[j],y[j-1]+k1)
+  y[j] <- y[j-1]+(k1+k2)/2 } # Runge-Kutta-2
+yrk2 <- y[m] # 81.54879
+# grafica de Euler y analitica y RK2
+xx <- seq(0,h,length=200)
+yy <- b/(exp(-b*(xx+C0))-a)                                                                
+plot(xx,yy,type="l",xlab="",ylab="",lwd=2,col="blue",cex.main=.9,ylim=c(0,165),xlim=c(-.05,.55),main="Solucin de y’ = y(ay+b), y(0)=10")
+segments(x0,y0,x1,yrk2,col="cyan",lwd=2)
+legend(0,150,legend=c("Runge-Kutta (Ord.2)"),col=c("cyan"),lwd=2,bty="n")
+
