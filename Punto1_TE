@@ -1,0 +1,19 @@
+require(deSolve)
+
+rm(list=ls())
+# La función ode() requiere obligatoriamente, varias cosas que debemos agregar
+# ode(valores iniciales, tis , func, parms, method, ...)
+fp = function(t,y, parms)
+  {
+  s = y^2-6*y 
+  return(list(s)) # ode requiere salida sea una lista
+}
+xis= seq(0,0.1,0.01)
+# Usamos la función ode()
+sol = ode(c(10), xis, fp, parms=NULL, method = "rk") # método Runge Kutta
+# Salida
+tabla = cbind(xis, sol[,2] )
+colnames(tabla) = c("ti", " Ti ")
+tabla
+# Representación
+plot(xis, sol[,2] )
